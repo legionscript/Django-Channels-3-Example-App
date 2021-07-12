@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<title>Real Time Django Channels App</title>
+    </head>
+    <body>
+    	<h1 id="number">{{ count }}</h1>
+    </body>
+
+    <script>
+    	const socket = new WebSocket('ws://localhost:8000/ws/counter/');
+
+    	socket.onmessage = function(e) {
+    		const data = JSON.parse(e.data);
+    		console.log(data);
+    		document.querySelector('#number').innerText = data.message;
+    	}
+    </script>
+</html>
